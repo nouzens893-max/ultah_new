@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selamat Ulang Tahun! 🎉 | Perayaan Spesial & Kue Realistis</title>
+  <meta name="description" content="Website perayaan ulang tahun interaktif dengan kue 3D realistis, lilin interaktif tiup via mikrofon, kembang api, balon, dan kado kejutan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="lights-on">
+  <!-- Dynamic Celebration Canvases -->
+  <canvas id="fireworksCanvas"></canvas>
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Interactive Floating Balloons Layer -->
+  <div id="balloonsContainer" aria-hidden="true"></div>
+
+  <!-- Ambient Light Overlay for Dimmed Room -->
+  <div class="ambient-vignette" id="ambientVignette"></div>
+
+  <!-- App Header / Control Bar -->
+  <header class="app-header">
+    <div class="brand-badge">
+      <span class="sparkle-icon">✨</span>
+      <span>Birthday Celebration</span>
+    </div>
+    <div class="header-actions">
+      <button id="btnMusic" class="pill-btn" title="Nyalakan / Matikan Musik" aria-label="Toggle Musik">
+        <span class="btn-icon" id="musicIcon">🎵</span>
+        <span class="btn-label" id="musicLabel">Putar Musik</span>
+      </button>
+      <button id="btnLights" class="pill-btn light-switch-btn" title="Redupkan / Nyalakan Lampu Ruangan" aria-label="Toggle Lampu Ruangan">
+        <span class="btn-icon" id="lightIcon">💡</span>
+        <span class="btn-label" id="lightLabel">Matikan Lampu</span>
+      </button>
+      <button id="btnCustomize" class="pill-btn pill-btn-gold" title="Kustomisasi Nama & Pesan" aria-label="Ubah Nama">
+        <span class="btn-icon">⚙️</span>
+        <span class="btn-label">Kustomisasi</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Showcase / Celebration Stage -->
+  <main class="main-container">
+    
+    <!-- Hero Greeting Section -->
+    <section class="hero-section">
+      <div class="badge-ribbon">
+        <span class="ribbon-text">🌟 9 Oktober • Hari Yang Sangat Istimewa 🌟</span>
+      </div>
+      <div class="birthday-date-badge">
+        <span class="calendar-icon">📅</span>
+        <span id="displayDate">9 Oktober</span>
+      </div>
+      <h1 class="celebration-title">
+        <span class="title-sub">Selamat Ulang Tahun ke-<span id="displayAge">19</span></span>
+        <span class="title-main glow-text" id="displayName">My Girl</span>
+      </h1>
+      <p class="greeting-subtitle" id="displaySubtitle">
+        Semoga harimu dipenuhi kebahagiaan, tawa ceria, dan semua impian indahmu terwujud nyata! ✨
+      </p>
+    </section>
+
+    <!-- The Realistic Birthday Cake Stage -->
+    <section class="cake-stage-section">
+      <!-- Glow aura emanated from candle -->
+      <div class="candle-ambient-glow" id="candleAmbientGlow"></div>
+
+      <!-- Realistic 3D Cake Wrapper -->
+      <div class="cake-stage" id="cakeStage">
+        
+        <!-- Stand Plate -->
+        <div class="stand-pedestal">
+          <div class="stand-plate">
+            <div class="stand-plate-inner"></div>
+            <div class="stand-highlight"></div>
+          </div>
+          <div class="stand-pillar"></div>
+          <div class="stand-base"></div>
+          <div class="stand-shadow"></div>
+        </div>
+
+        <!-- Tier 2 (Bottom Base Tier) -->
+        <div class="cake-tier cake-tier-bottom">
+          <div class="tier-frosting-top">
+            <div class="frosting-layer"></div>
+            <!-- Dripping Ganache Layer -->
+            <div class="ganache-drips ganache-bottom">
+              <span class="drip d1"></span>
+              <span class="drip d2"></span>
+              <span class="drip d3"></span>
+              <span class="drip d4"></span>
+              <span class="drip d5"></span>
+              <span class="drip d6"></span>
+              <span class="drip d7"></span>
+              <span class="drip d8"></span>
+            </div>
+          </div>
+          <div class="tier-wall">
+            <div class="tier-texture"></div>
+            <div class="cream-piping bottom-piping">
+              <span class="rosette"></span><span class="rosette"></span>
+              <span class="rosette"></span><span class="rosette"></span>
+              <span class="rosette"></span><span class="rosette"></span>
+              <span class="rosette"></span><span class="rosette"></span>
+              <span class="rosette"></span><span class="rosette"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 1 (Top Tier) -->
+        <div class="cake-tier cake-tier-top">
+          <div class="tier-frosting-top">
+            <div class="frosting-layer"></div>
+            <!-- Dripping Strawberry/Choco Ganache -->
+            <div class="ganache-drips ganache-top">
+              <span class="drip dt1"></span>
+              <span class="drip dt2"></span>
+              <span class="drip dt3"></span>
+              <span class="drip dt4"></span>
+              <span class="drip dt5"></span>
+              <span class="drip dt6"></span>
+            </div>
+
+            <!-- Delicious Toppings on Top Tier -->
+            <div class="cake-toppings">
+              <!-- Fresh Realistic Strawberries -->
+              <div class="strawberry s1">
+                <div class="leaf"></div>
+                <div class="berry-body"></div>
+                <div class="berry-shine"></div>
+              </div>
+              <div class="strawberry s2">
+                <div class="leaf"></div>
+                <div class="berry-body"></div>
+                <div class="berry-shine"></div>
+              </div>
+              <div class="strawberry s3">
+                <div class="leaf"></div>
+                <div class="berry-body"></div>
+                <div class="berry-shine"></div>
+              </div>
+              <div class="blueberry b1"></div>
+              <div class="blueberry b2"></div>
+              <div class="blueberry b3"></div>
+              
+              <!-- Sprinkles & Pearls -->
+              <div class="sprinkle-group">
+                <span class="sprinkle sp-gold sp1"></span>
+                <span class="sprinkle sp-rose sp2"></span>
+                <span class="sprinkle sp-gold sp3"></span>
+                <span class="sprinkle sp-white sp4"></span>
+                <span class="sprinkle sp-pearl sp5"></span>
+                <span class="sprinkle sp-gold sp6"></span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tier-wall">
+            <div class="tier-texture"></div>
+            <div class="cream-piping top-piping">
+              <span class="rosette"></span><span class="rosette"></span>
+              <span class="rosette"></span><span class="rosette"></span>
+              <span class="rosette"></span><span class="rosette"></span>
+              <span class="rosette"></span><span class="rosette"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Realistic Birthday Candles -->
+        <div class="candle-wrapper" id="candleWrapper">
+          <!-- Main Center Candle -->
+          <div class="candle candle-main" id="mainCandle">
+            <div class="candle-stick">
+              <div class="candle-spiral"></div>
+              <div class="wax-drip"></div>
+            </div>
+            <div class="candle-wick"></div>
+            
+            <!-- Animated Realistic Flame -->
+            <div class="candle-flame" id="flameElement">
+              <div class="flame-outer"></div>
+              <div class="flame-inner"></div>
+              <div class="flame-core"></div>
+              <div class="flame-sparkle"></div>
+            </div>
+
+            <!-- Realistic Smoke trail (appears on blowout) -->
+            <div class="smoke-trail" id="smokeTrail">
+              <div class="smoke-puff smk1"></div>
+              <div class="smoke-puff smk2"></div>
+              <div class="smoke-puff smk3"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cut Slice Graphic (Hidden initially, slides out on Slice interaction) -->
+        <div class="cake-slice-piece" id="cakeSlicePiece">
+          <div class="slice-inner">
+            <div class="slice-layers">
+              <div class="layer sponge-1"></div>
+              <div class="layer jam-layer"></div>
+              <div class="layer sponge-2"></div>
+              <div class="layer cream-layer"></div>
+              <div class="layer sponge-3"></div>
+            </div>
+            <div class="slice-frosting"></div>
+            <div class="slice-berry">🍓</div>
+          </div>
+          <div class="slice-plate"></div>
+        </div>
+
+        <!-- Decorative Cake Knife -->
+        <div class="cake-knife" id="cakeKnife">
+          <div class="knife-handle"></div>
+          <div class="knife-blade"></div>
+        </div>
+
+      </div>
+
+      <!-- Interactive Blow Controls -->
+      <div class="cake-interaction-panel">
+        <div class="candle-status-badge" id="candleStatusBadge">
+          <span class="status-dot pulsing"></span>
+          <span id="candleStatusText">Lilin Menyala Hangat 🕯️ Buatlah Permohonan!</span>
+        </div>
+
+        <div class="action-buttons-row">
+          <button id="btnBlowDirect" class="action-btn action-btn-primary" title="Klik untuk meniup lilin">
+            <span class="btn-emoji">💨</span>
+            <span class="btn-text">Tiup Lilin</span>
+          </button>
+
+          <button id="btnMicBlow" class="action-btn action-btn-secondary" title="Gunakan mic untuk meniup langsung">
+            <span class="btn-emoji">🎙️</span>
+            <span class="btn-text" id="micBtnText">Tiup via Mikrofon</span>
+          </button>
+
+          <button id="btnRelight" class="action-btn action-btn-ghost hidden" title="Nyalakan lilin kembali">
+            <span class="btn-emoji">🔥</span>
+            <span class="btn-text">Nyalakan Lagi</span>
+          </button>
+
+          <button id="btnCutCake" class="action-btn action-btn-gold" title="Potong sepotong kue lezat">
+            <span class="btn-emoji">🔪</span>
+            <span class="btn-text" id="cutBtnText">Potong Kue</span>
+          </button>
+        </div>
+
+        <!-- Mic Volume meter indicator when mic is active -->
+        <div class="mic-visualizer-wrap hidden" id="micVisualizer">
+          <div class="mic-caption">
+            <span class="pulse-mic">🎙️</span>
+            <span>Hembuskan nafas ke mikrofonmu sekarang...</span>
+          </div>
+          <div class="mic-meter-bar">
+            <div class="mic-meter-fill" id="micMeterFill"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apology Section: muncul setelah 10 balon diletuskan -->
+    <section class="apology-section hidden" id="apologySection">
+      <div class="apology-inner glass-panel">
+        <div class="apology-icon">💬</div>
+        <h2 class="apology-title">Jujur dari hati</h2>
+        <p class="apology-body">
+          Aku tau aku belum jadi cowok yang sempurna buat kamu.<br>
+          Kadang kurang peka, kadang nyebelin, kadang diem aja waktu harusnya ngomong.<br><br>
+          Tapi percaya deh — aku lagi belajar, pelan-pelan. Karena kamu layak dapet yang terbaik,
+          dan aku pengen jadi bagian dari itu.
+        </p>
+        <p class="apology-closing">Makasih udah sabar sama aku. Beneran.</p>
+        <div class="apology-sig">— Dari yang lagi berusaha jadi lebih baik 🤍</div>
+      </div>
+    </section>
+
+    <!-- Celebration Features & Interactive Cards Grid -->
+    <section class="interactive-grid">
+      
+      <!-- Card 1: Surprise 3D Gift Box -->
+      <div class="feature-card gift-card-container">
+        <div class="card-header">
+          <h3>🎁 Kotak Kado Kejutan</h3>
+          <p>Sentuh kotak kado untuk membuka isi rahasia!</p>
+        </div>
+        <div class="gift-box-stage" id="giftBoxStage" title="Klik untuk membuka kado!">
+          <div class="gift-box-3d" id="giftBox3D">
+            <!-- Gift Lid -->
+            <div class="gift-lid">
+              <div class="lid-ribbon"></div>
+              <div class="ribbon-bow">
+                <span class="bow-loop left"></span>
+                <span class="bow-loop right"></span>
+                <span class="bow-center"></span>
+              </div>
+            </div>
+            <!-- Gift Base -->
+            <div class="gift-body">
+              <div class="gift-ribbon-vertical"></div>
+              <div class="gift-ribbon-horizontal"></div>
+            </div>
+            <div class="gift-shadow"></div>
+          </div>
+          <!-- Sparkles on open -->
+          <div class="gift-sparkles" id="giftSparkles"></div>
+        </div>
+        <div class="gift-status-hint" id="giftStatusHint">Klik kotaknya untuk unboxing! ✨</div>
+      </div>
+
+      <!-- Card 2: Interactive Pop Balloons Game -->
+      <div class="feature-card balloon-game-card">
+        <div class="card-header">
+          <h3>🎈 Letuskan Balon Pesta</h3>
+          <p>Klik balon yang melayang untuk meletuskannya!</p>
+        </div>
+        <div class="balloon-counter-box">
+          <div class="counter-display">
+            <span class="counter-number" id="poppedScore">0</span>
+            <span class="counter-label">Balon Diletuskan</span>
+          </div>
+          <button id="btnSpawnBalloons" class="action-btn action-btn-secondary btn-sm">
+            <span>🎉 Tambah Balon</span>
+          </button>
+        </div>
+        <div class="balloon-tip">
+          <span>💡 Balon warna-warni sedang melayang bebas di layarmu. Coba klik salah satunya!</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Heartfelt Letter / Polaroid Card -->
+      <div class="feature-card polaroid-memory-card">
+        <div class="card-header">
+          <h3>📸 Foto Awal Kenal</h3>
+          <p>Momen manis pertama kali kita ngobrol & mabar ✨</p>
+        </div>
+        <div class="polaroid-wrapper" id="polaroidWrapper">
+          <div class="polaroid-pin" aria-hidden="true"></div>
+          <div class="polaroid-frame" id="polaroidFrame" role="button" tabindex="0" title="Klik untuk melihat foto lebih jelas & baca chat lengkap!">
+            <div class="polaroid-photo">
+              <img src="awal-kenal.jpg" alt="Foto Chat Pertama Kali Kenal 6 November 2025" class="polaroid-img" id="polaroidImg">
+              <span class="photo-date-tag">🗓️ 6 Nov 2025</span>
+              <div class="photo-hover-hint">
+                <span class="hover-icon">🔍</span>
+                <span class="hover-text">Klik Perbesar Chat</span>
+              </div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwriting" id="displayPolaroidText">
+                "awal kita kenal, bermula gara gara kamu ikut ladies compe :^"
+              </p>
+              <div class="polaroid-tags">
+                <span class="polaroid-tag-item">🎮 MLBB • Fredrinn & Aamon</span>
+              </div>
+              <span class="polaroid-signature" id="displaySignature">~ Dari Cowomu yang Jago Main Jungle ~</span>
+            </div>
+          </div>
+          <button class="action-btn action-btn-secondary btn-sm polaroid-action-btn" id="btnOpenPhotoModal">
+            <span>🔍 Buka Foto Chat Penuh</span>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Wish Wall / Doa & Harapan Section -->
+    <section class="wish-wall-section">
+      <div class="section-title-wrap">
+        <h2>💌 Dinding Doa & Harapan</h2>
+        <p>Kirimkan doa dan ucapan manis untuk melengkapi hari istimewa ini</p>
+      </div>
+
+      <!-- Wish submission form -->
+      <div class="wish-form-card glass-panel">
+        <div class="form-inputs-row">
+          <input type="text" id="inputSender" class="custom-input" placeholder="Nama Anda (cth: Budi / Teman Baik)" maxlength="30">
+          <input type="text" id="inputWish" class="custom-input flex-grow" placeholder="Tuliskan ucapan atau doa terbaikmu di sini..." maxlength="180">
+          <button id="btnSendWish" class="action-btn action-btn-primary">
+            <span>Kirim Doa ✨</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Wish Feed / List -->
+      <div class="wishes-stream" id="wishesStream">
+        <!-- Initial preloaded sweet wishes -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Dibuat dengan segenap cinta & kehangatan untuk merayakan hari terbaikmu </p>
+      <div class="footer-pills">
+        <span>🎂 Kue 3D Realistis</span>
+        <span>🕯️ Tiup Lilin Mikrofon</span>
+        <span>🎆 Kembang Api & Konfeti</span>
+        <span>🎵 Musik Orkestra</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Surprise Gift Modal Pop-up -->
+  <div class="modal-overlay hidden" id="giftModal">
+    <div class="modal-card surprise-modal glass-panel">
+      <button class="close-modal-btn" id="btnCloseGiftModal" aria-label="Tutup Modal">&times;</button>
+      <div class="modal-icon-header">
+        <span class="big-bounce-icon">🎁✨</span>
+      </div>
+      <h2 class="modal-title">Selamat Membuka Hadiah!</h2>
+      <div class="modal-gift-content">
+        <div class="gift-badge-highlight">Kupon Harapan Tanpa Batas</div>
+        <p class="modal-gift-text" id="modalGiftMessage">
+          "Semoga di umur kamu yang baru ini, semua yang kamu inginkan tercapai, tetap sehat dan bahagia selalu "
+        </p>
+        <div class="gift-voucher-box">
+          <span class="voucher-code" id="displayVoucherCode">KODE KADO: #9-OKTOBER-2026</span>
+          <p class="voucher-sub">Berlaku selamanya untuk senyuman dan keceriaanmu</p>
+        </div>
+      </div>
+      <button class="action-btn action-btn-primary btn-block" id="btnClaimGift">
+        <span>Terima Kasih Banyak! </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Photo Lightbox Modal -->
+  <div class="modal-overlay hidden" id="photoModal">
+    <div class="photo-modal-card">
+      <button class="close-modal-btn photo-close-btn" id="btnClosePhotoModal" aria-label="Tutup Foto">&times;</button>
+      <div class="photo-modal-header">
+        <h2 class="modal-title">📸 Chat Pertama Kali Kenal</h2>
+        <p class="modal-subtitle">6 November 2025 — Dari sini semua bermula 🥺💕</p>
+      </div>
+      <div class="photo-modal-body">
+        <img src="awal-kenal.jpg" alt="Foto Chat Pertama Kali Kenal" class="photo-modal-img" id="photoModalImg">
+        <div class="photo-modal-caption">
+          <div class="photo-modal-tags">
+            <span>🎮 MLBB</span>
+            <span>📅 6 Nov 2025</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customization Settings Modal -->
+  <div class="modal-overlay hidden" id="customModal">
+    <div class="modal-card glass-panel">
+      <button class="close-modal-btn" id="btnCloseCustomModal" aria-label="Tutup Modal">&times;</button>
+      <h2 class="modal-title">⚙️ Kustomisasi Perayaan</h2>
+      <p class="modal-subtitle">Ubah nama, tanggal, usia, dan pesan ucapan sesuai orang tercinta:</p>
+
+      <div class="custom-form-group">
+        <label for="customNameInput">Nama yang Berulang Tahun:</label>
+        <input type="text" id="customNameInput" class="custom-input" placeholder="Contoh: Putri, Rizky, atau Mama Tercinta">
+      </div>
+
+      <div class="custom-form-group">
+        <label for="customDateInput">Tanggal & Bulan Ulang Tahun:</label>
+        <input type="text" id="customDateInput" class="custom-input" placeholder="9 Oktober">
+      </div>
+
+      <div class="custom-form-group">
+        <label for="customAgeInput">Ulang Tahun ke- (Usia):</label>
+        <input type="number" id="customAgeInput" class="custom-input" placeholder="19" min="1" max="120">
+      </div>
+
+      <div class="custom-form-group">
+        <label for="customGreetingInput">Pesan / Subtitle Utama:</label>
+        <textarea id="customGreetingInput" class="custom-input" rows="3" placeholder="Tuliskan ucapan pembuka..."></textarea>
+      </div>
+
+      <div class="custom-form-group">
+        <label for="customPolaroidInput">Pesan di Kartu Kenangan:</label>
+        <textarea id="customPolaroidInput" class="custom-input" rows="2" placeholder="Catatan manis di polaroid..."></textarea>
+      </div>
+
+      <div class="modal-actions-row">
+        <button id="btnSaveCustom" class="action-btn action-btn-primary flex-grow">
+          <span>Simpan Perubahan ✨</span>
+        </button>
+        <button id="btnResetCustom" class="action-btn action-btn-ghost">
+          <span>Reset Default</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slice Cake Slice Pop-up Note -->
+  <div class="slice-toast hidden" id="sliceToast">
+    <span>🍰 Sepotong kue manis telah dipotong untukmu! Nikmati kelezatannya! 🎉</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
